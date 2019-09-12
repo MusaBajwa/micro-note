@@ -8,5 +8,35 @@
     <body>
         <!-- This is a comment -->
         <h1>micronote</h1>
+
+        <div id="note" contenteditable></div>
+        <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+
+            fs.readFile('/note', 'utf8', function(err, data) {
+
+                if (err != null || data ==null){
+                    data="Welcome to notepad!"
+                }
+
+                document.querySelector('#note').innerHTML = data;
+            })
+    
+            var saveFile = function(){
+        fs.writeFile('/note', document.querySelector('#note').innerHTML, function (err) {
+            if (err) throw err;
+        });
+    }
+    var interval = window.setInterval(saveFile, 3000);
+
+});
+        
+        
+        
+        
+        
+        </script>
+       
     </body>
 </html>
