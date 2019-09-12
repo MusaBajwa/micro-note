@@ -1,7 +1,5 @@
 <!doctype html>
 <html>
-    <link href="index.css" rel="stylesheet" type="text/css"
-        <div id="instructions" class="paper">
     <head>
         <meta charset="utf-8">
         <title>My Web Page</title>
@@ -33,8 +31,37 @@
                 });
             }
             var interval = window.setInterval(saveFile, 3000);
+
+            hotkeys.filter = function(event) {
+  
+  var tagName = (event.target || event.srcElement).tagName;
+  return !(tagName.isContentEditable || tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA');
+  }
+       
+   window.addEventListener('DOMContentLoaded', (event) => {
+   console.log('DOM fully loaded and parsed');
+      fs.readFile('/note', 'utf8', function(err, data){
+          
+          try{   
+              if (err) throw err; 
+              if (data) {
+                  document.querySelector('#note').innerHTML = data;
+              }
+          }catch(err){
+              document.querySelector('#note').innerHTML = "Welcome to my notepad!";
+           }
+                    
+       });  
+      //  This function saves the work written in the notepad when ctrl+s is pressed
+       hotkeys('ctrl+s', function() {
+          fs.writeFile('/note', document.querySelector('#note').innerHTML, err => {
+          if (err) throw err;
+          else alert('Your note has been saved');
+          });
+       }); 
+       
+  });
          </script>
        
     </body>
-</div>
 </html>
