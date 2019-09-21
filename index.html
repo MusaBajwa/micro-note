@@ -31,9 +31,7 @@
                 });
             });
             var saveFile = function(){
-                
                 fs.writeFile('/note', note.innerHTML, function (err) {
-                
                     if (err) {
                         console.log('Error Saving');
                     } else {
@@ -42,7 +40,6 @@
                 });
             }
             var interval = window.setInterval(saveFile, 3000);
-
          </script>
        </div>
     </body>
