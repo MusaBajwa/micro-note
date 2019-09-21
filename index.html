@@ -27,8 +27,17 @@
                 });
             });
             var saveFile = function(){
+                
                 fs.writeFile('/note', document.querySelector('#note').innerHTML, function (err) {
-                    if (err) throw err;
+                
+                    if (err) {
+
+                        console.log('Error Saving');
+
+                    } else {
+
+                        console.log('Saved!');
+                    }
                 });
             }
             var interval = window.setInterval(saveFile, 3000);
