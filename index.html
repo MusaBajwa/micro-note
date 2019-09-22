@@ -5,7 +5,11 @@
         <meta charset="utf-8">
         <title>My Web Page</title>
     </head>
-
+    <style>
+        #note:focus {
+          box-shadow: 0 0 4px 2px rgb(9, 135, 245);
+        }
+    </style>
     <body>
             <div class="paper container">
         <h1>micronote</h1>
@@ -14,35 +18,28 @@
         <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
         <script>const 
             fs = new Filer.FileSystem(); 
-            
+            var note = document.querySelector('#note');
             document.addEventListener('DOMContentLoaded', (event) => {
-                
+                note.focus();
                 fs.readFile('/note', 'utf8', function(err, data) {
                     if(err != null || data == null){
                         data = "Welcome to my notepad!"
                     }
                   
-                    document.querySelector('#note').innerHTML = data;
+                    note.innerHTML = data;
                 
                 });
             });
             var saveFile = function(){
-                
-                fs.writeFile('/note', document.querySelector('#note').innerHTML, function (err) {
-                
+                fs.writeFile('/note', note.innerHTML, function (err) {
                     if (err) {
-
                         console.log('Error Saving');
-
                     } else {
-
                         console.log('Saved!');
                     }
                 });
             }
             var interval = window.setInterval(saveFile, 3000);
-
-            
          </script>
        </div>
     </body>
